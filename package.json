@@ -1,8 +1,6 @@
 {
-  "name": "components",
-  "version": "1.0.0",
-  "main": "main.js",
-  "types": "main.ts",
+  "name": "trn-components",
+  "version": "0.1.0",
   "license": "MPL-2.0",
   "private": true,
   "scripts": {
