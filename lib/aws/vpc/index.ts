@@ -88,14 +88,14 @@ export class VpcConstruct extends Construct {
       vpcId: vpc.id,
     });
 
-    const publicRouteTableAssociations = publicSubnets.map((subnet, index) => {
+    publicSubnets.map((subnet, index) => {
       new aws.routeTableAssociation.RouteTableAssociation(this, `route-table-public-association-${index}`, {
         routeTableId: publicRouteTable.id,
         subnetId: subnet.id,
       });
     });
 
-    const privateRouteTableAssociations = privateRouteTables.map((privateRouteTable, index) => {
+    privateRouteTables.map((privateRouteTable, index) => {
       return new aws.routeTableAssociation.RouteTableAssociation(this, `route-table-private-association-${index}`, {
         routeTableId: privateRouteTable.id,
         subnetId: privateSubnets[index].id,
