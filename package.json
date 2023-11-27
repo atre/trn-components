@@ -11,6 +11,7 @@
     "compile": "tsc --pretty",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
     "watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
