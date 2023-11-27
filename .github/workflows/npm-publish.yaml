@@ -4,29 +4,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-and-publish:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.18.2'
+          registry-url: 'https://registry.npmjs.org'
 
-    - name: Use Node.js 18.18.2
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.18.2'
-        registry-url: 'https://registry.npmjs.org'
+        name: Install dependencies    
+      - run: yarn install --frozen-lockfile
 
-    - name: Install dependencies
-      run: yarn install --from-lock-file
+        name: Run ESLint
+      - run: yarn lint
 
-    - name: Run ESLint
-      run: yarn lint
+        name: Check TypeScript errors
+      - run: yarn type-check
 
-    - name: Check TypeScript errors
-      run: yarn type-check
-
-    - name: Publish to npm
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.18.2'
+          registry-url: https://registry.npmjs.org/
+      - run: yarn install --frozen-lockfile
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
