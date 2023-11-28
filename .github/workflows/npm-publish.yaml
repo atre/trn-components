@@ -32,7 +32,22 @@ jobs:
         with:
           node-version: '18.18.2'
           registry-url: https://registry.npmjs.org/
-      - run: yarn install --frozen-lockfile
-      - run: npm publish
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Update package version
+        run: |
+          # Get current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          # Create a new version with timestamp (Format: 0.1.0-202328111704.rc0)
+          TIMESTAMP=$(date +"%Y%m%d%H%M")
+          NEW_VERSION="${CURRENT_VERSION}-${TIMESTAMP}.rc0"
+          echo "New version: $NEW_VERSION"
+          # Update the version in package.json
+          npm version $NEW_VERSION --no-git-tag-version
+
+      - name: Publish to npm
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
