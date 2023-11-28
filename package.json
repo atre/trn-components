@@ -2,7 +2,7 @@
   "name": "trn-components",
   "version": "0.2.0",
   "license": "MPL-2.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "prepare": "husky install",
     "get": "cdktf get",
