@@ -8,6 +8,8 @@
     "build": "tsc",
     "synth": "cdktf synth",
     "compile": "tsc --pretty",
+    "lint": "eslint . --ext .ts",
+    "format": "eslint . --ext .ts --fix",
     "watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",

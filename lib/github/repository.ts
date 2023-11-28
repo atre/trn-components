@@ -1,10 +1,10 @@
 import {
   Repository,
   RepositoryConfig,
-} from "@cdktf/provider-github/lib/repository";
-import { RepositoryCollaborator } from "@cdktf/provider-github/lib/repository-collaborator";
+} from '@cdktf/provider-github/lib/repository';
+import { RepositoryCollaborator } from '@cdktf/provider-github/lib/repository-collaborator';
 
-import { Construct } from "constructs";
+import { Construct } from 'constructs';
 
 export interface GithubRepositoryProps {
   collaborator: {
@@ -17,15 +17,15 @@ export class GithubRepository extends Construct {
   constructor(
     scope: Construct,
     id: string,
-    props: RepositoryConfig & GithubRepositoryProps
+    props: RepositoryConfig & GithubRepositoryProps,
   ) {
     super(scope, id);
 
     const { collaborator } = props;
 
-    const repo = new Repository(this, "init-repo", props);
+    const repo = new Repository(this, 'init-repo', props);
 
-    new RepositoryCollaborator(this, "colab", {
+    new RepositoryCollaborator(this, 'colab', {
       ...collaborator,
       repository: repo.name,
     });
