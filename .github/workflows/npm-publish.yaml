@@ -37,15 +37,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Update package version
-        run: |
-          # Get current version from package.json
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          # Create a new version with timestamp (Format: 0.1.0-202328111704.rc0)
-          TIMESTAMP=$(date +"%Y%m%d%H%M")
-          NEW_VERSION="${CURRENT_VERSION}-${TIMESTAMP}.rc0"
-          echo "New version: $NEW_VERSION"
-          # Update the version in package.json
-          npm version $NEW_VERSION --no-git-tag-version
+        run: npm version prerelease --preid=$(date +'%y%m%d%H%M%S').rc --no-git-tag-version
 
       - name: Publish to npm
         run: npm publish
