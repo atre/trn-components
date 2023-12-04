@@ -6,6 +6,11 @@ This repository hosts a comprehensive collection of CDKTF (Cloud Development Kit
 
 Our components and constructs are designed to be modular and reusable, enabling efficient setup of complex cloud infrastructure elements across AWS and Azure. They embody infrastructure-as-code (IaC) best practices and are perfect for learning and applying CI/CD and automation techniques in real-world scenarios.
 
+
+### Flow after deploying component to library some registry
+
+![Alt text](public/images/image.png)
+
 ### Contents
 
 - **VPC & Network Constructs (AWS):** Set up AWS Virtual Private Clouds, subnets, internet gateways, and NAT gateways.
