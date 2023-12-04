@@ -6,15 +6,17 @@ import { RouteTable } from '@cdktf/provider-aws/lib/route-table';
 import { RouteTableAssociation } from '@cdktf/provider-aws/lib/route-table-association';
 import { Subnet } from '@cdktf/provider-aws/lib/subnet';
 import { Vpc } from '@cdktf/provider-aws/lib/vpc';
-import { Fn } from 'cdktf';
+import { Fn, TerraformOutput } from 'cdktf';
 import { Construct } from 'constructs';
 import { DEFAULT_CIDR } from './constant';
 import { SubnetOptions, SubnetType, VpcOptions } from './interface';
 
 export class VpcConstruct extends Construct {
+  public readonly vpcId: string;
+  public readonly privateSubnets: string[];
+
   constructor(scope: Construct, id: string, private opts: VpcOptions = {}) {
     super(scope, id);
-
 
     const { name = '', cidr = DEFAULT_CIDR, azs, tags, publicSubnetTags, privateSubnetTags } = opts;
 
@@ -109,6 +111,17 @@ export class VpcConstruct extends Construct {
         routeTableId: privateRouteTable.id,
         subnetId: privateSubnets[index].id,
       });
+    });
+
+    this.privateSubnets = privateSubnets.map((subnet) => subnet.id);
+    this.vpcId = vpc.id;
+
+    new TerraformOutput(this, 'privateSubnets', {
+      value: privateSubnets.map((subnet) => subnet.id),
+    });
+
+    new TerraformOutput(this, 'vpcId', {
+      value: vpc.id,
     });
   }
 
