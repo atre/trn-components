@@ -302,6 +302,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@cdktf/provider-azurerm@^11.0.7":
+  version "11.0.7"
+  resolved "https://registry.yarnpkg.com/@cdktf/provider-azurerm/-/provider-azurerm-11.0.7.tgz#0bacd55fa817e6e3b82e41c02f2a7512c40e807d"
+  integrity sha512-v3GgN1526P6LueWVpyV0LSvAEv+jKVWpJPS3iLm+T9UZX2uE/BTKwohjSjd3hTD3MITIWt9KV2GKDlNI4a+pXA==
+
 "@cdktf/provider-github@12.0.2":
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/@cdktf/provider-github/-/provider-github-12.0.2.tgz#c3e50145fc6f83d4e9667b522f677acf7458c773"
@@ -3722,10 +3727,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@*:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.2.tgz#00d1c7c1c46928c5845c1ee8d0cc2791031d4c43"
-  integrity sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==
+typescript@^5.3.2:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
+  integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
