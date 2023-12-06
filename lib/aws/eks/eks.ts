@@ -9,7 +9,7 @@ export class EksConstruct extends Construct {
   constructor(scope: Construct, id: string, private opts: Partial<EksConstructConfig>) {
     super(scope, id);
 
-    const { tags, vpcId } = this.opts;
+    const { tags, vpcId, cidrBlocks } = this.opts;
 
     const controlPlaneRole = new IamRoleConstruct(this, 'iam-role', {
       name: 'control-plane-role',
@@ -19,6 +19,7 @@ export class EksConstruct extends Construct {
     const clusterSg = new ClusterSecurityGroupConstruct(this, 'cluster-sg', {
       name: 'cluster-sg',
       vpcId,
+      cidrBlocks,
       tags,
     });
 
