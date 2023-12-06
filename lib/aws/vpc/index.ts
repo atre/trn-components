@@ -15,7 +15,7 @@ export class VpcConstruct extends Construct {
   public readonly vpcId: string;
   public readonly privateSubnets: string[];
 
-  constructor(scope: Construct, id: string, private opts: VpcOptions = {}) {
+  constructor(scope: Construct, id: string, private opts: VpcOptions) {
     super(scope, id);
 
     const { name = '', cidr = DEFAULT_CIDR, azs, tags, publicSubnetTags, privateSubnetTags } = opts;

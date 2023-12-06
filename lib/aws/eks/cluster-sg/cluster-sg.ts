@@ -1,14 +1,14 @@
 import { SecurityGroup, SecurityGroupConfig } from '@cdktf/provider-aws/lib/security-group';
-import { SecurityGroupRule } from '@cdktf/provider-aws/lib/security-group-rule';
+import { SecurityGroupRule, SecurityGroupRuleConfig } from '@cdktf/provider-aws/lib/security-group-rule';
 import { Construct } from 'constructs';
 
 export class ClusterSecurityGroupConstruct extends Construct {
   public readonly id: string;
 
-  constructor(scope: Construct, id: string, private opts: SecurityGroupConfig) {
+  constructor(scope: Construct, id: string, private opts: Partial<SecurityGroupConfig & SecurityGroupRuleConfig>) {
     super(scope, id);
 
-    const { vpcId, tags } = this.opts;
+    const { vpcId, cidrBlocks, tags } = this.opts;
 
     const clusterSG = new SecurityGroup(this, 'eks-cluster-sg', {
       vpcId,
@@ -29,7 +29,7 @@ export class ClusterSecurityGroupConstruct extends Construct {
       toPort: 443,
       protocol: 'tcp',
       type: 'ingress',
-
+      cidrBlocks,
     });
 
     this.id = clusterSG.id;
