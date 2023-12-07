@@ -1,0 +1,1 @@
+export { IamRoleConstruct } from './iam-role';
