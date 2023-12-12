@@ -7,15 +7,15 @@ export interface VpcOptions {
   enableNatGateway?: boolean;
   singleNatGateway?: boolean;
   enableDnsHostnames?: boolean;
-  tags?: { [key: string]: string };
-  publicSubnetTags?: { [key: string]: string };
-  privateSubnetTags?: { [key: string]: string };
+  tags?: Record<string, string>;
+  publicSubnetTags?: Record<string, string>;
+  privateSubnetTags?: Record<string, string>;
 }
 
 export interface SubnetOptions {
   vpcId: string;
   availabilityZones?: string[];
-  subnetTags?: { [key: string]: string };
+  subnetTags?: Record<string, string>;
 }
 
 export enum SubnetType {
