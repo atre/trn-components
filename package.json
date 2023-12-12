@@ -1,8 +1,8 @@
 {
   "name": "trn-components",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "license": "MPL-2.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "prepare": "husky install",
     "get": "cdktf get",
@@ -11,6 +11,7 @@
     "compile": "tsc --pretty",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
     "watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
