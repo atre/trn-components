@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@cdktf/provider-aws": "^18.0.6",
+    "@cdktf/provider-azurerm": "^11.1.0",
     "@cdktf/provider-github": "12.0.2",
     "cdktf": "^0.19.1",
     "constructs": "^10.3.0",
