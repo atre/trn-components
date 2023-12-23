@@ -1,0 +1,48 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.18.2'
+          registry-url: 'https://registry.npmjs.org'
+
+        name: Install dependencies    
+      - run: yarn install --frozen-lockfile
+
+        name: Run ESLint
+      - run: yarn lint
+
+        name: Check TypeScript errors
+      - run: yarn type-check
+
+  publish:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.18.2'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Update package version
+        run: npm version prerelease --preid=$(date +'%y%m%d%H%M%S').rc --no-git-tag-version
+      
+      - name: Build package
+        run: yarn build
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

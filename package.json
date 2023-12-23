@@ -2,12 +2,16 @@
   "name": "trn-components",
   "version": "0.1.0",
   "license": "MPL-2.0",
-  "private": true,
+  "private": false,
   "scripts": {
+    "prepare": "husky install",
     "get": "cdktf get",
     "build": "tsc",
     "synth": "cdktf synth",
     "compile": "tsc --pretty",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
     "watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -18,10 +22,12 @@
     "node": ">=18.0"
   },
   "dependencies": {
+    "@cdktf/provider-aws": "^18.0.6",
     "@cdktf/provider-azurerm": "^11.0.7",
     "@cdktf/provider-github": "12.0.2",
     "cdktf": "^0.19.1",
-    "constructs": "^10.3.0"
+    "constructs": "^10.3.0",
+    "husky": "^8.0.3"
   },
   "devDependencies": {
     "@types/jest": "^29.5.10",
