@@ -1,12 +1,9 @@
 import { StorageAccount, StorageAccountConfig } from '@cdktf/provider-azurerm/lib/storage-account';
 import { StorageContainer, StorageContainerConfig } from '@cdktf/provider-azurerm/lib/storage-container';
 import { Construct } from 'constructs';
-import { AzureConstruct } from '../classes';
-import { EnvProps } from '../interfaces';
+import { AzureConstruct, AzureConstructProps } from '../classes';
 
-export interface AzureRemoteBackendProps {
-  isLocalBackend?: boolean;
-  env: EnvProps;
+export interface AzureRemoteBackendProps extends AzureConstructProps {
   storageAccount: Omit<StorageAccountConfig, 'name' | 'resourceGroupName'>;
   storageContainer?: Omit<StorageContainerConfig, 'name' | 'storageAccountName'>;
 }

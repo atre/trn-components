@@ -1,10 +1,8 @@
 import { VirtualNetwork, VirtualNetworkConfig } from '@cdktf/provider-azurerm/lib/virtual-network';
 import { Construct } from 'constructs';
-import { AzureConstruct } from '../classes';
-import { EnvProps } from '../interfaces';
+import { AzureConstruct, AzureConstructProps } from '../classes';
 
-export interface NetworkProps {
-  env: EnvProps;
+export interface NetworkProps extends AzureConstructProps {
   virtualNetwork: Omit<VirtualNetworkConfig, 'name' | 'location' | 'resourceGroupName'>;
 }
 

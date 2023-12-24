@@ -3,7 +3,7 @@ import { AzurermBackend } from 'cdktf/lib/backends/azurerm-backend';
 import { Construct } from 'constructs';
 import { EnvProps } from './interfaces';
 
-interface AzureConstructProps {
+export interface AzureConstructProps {
   isLocalBackend?: boolean;
   env: EnvProps;
 }
