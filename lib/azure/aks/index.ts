@@ -2,16 +2,16 @@ import { KubernetesCluster, KubernetesClusterConfig } from '@cdktf/provider-azur
 import { Construct } from 'constructs';
 import { AzureConstruct, AzureConstructProps } from '../classes';
 
-interface AksClusterProps extends AzureConstructProps {
-  kubernetesCluster: KubernetesClusterConfig;
+export interface AksProps extends AzureConstructProps {
+  kubernetesCluster: Omit<KubernetesClusterConfig, 'name' | 'location' | 'resourceGroupName' | 'dnsPrefix'>;
 }
 
-export class AksCluster extends AzureConstruct {
-  constructor(scope: Construct, id: string, props: AksClusterProps) {
+export class Aks extends AzureConstruct {
+  constructor(scope: Construct, id: string, props: AksProps) {
     super(scope, id, props);
 
-    const { kubernetesCluster } = props;
+    const { env, kubernetesCluster } = props;
 
-    new KubernetesCluster(this, 'kubernetes_cluster', kubernetesCluster);
+    new KubernetesCluster(this, 'kubernetes_cluster', { ...kubernetesCluster, ...env, dnsPrefix: env.name });
   }
 }
