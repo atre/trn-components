@@ -1,40 +1,27 @@
-import { AzurermProvider } from '@cdktf/provider-azurerm/lib/provider';
 import { StorageAccount, StorageAccountConfig } from '@cdktf/provider-azurerm/lib/storage-account';
 import { StorageContainer, StorageContainerConfig } from '@cdktf/provider-azurerm/lib/storage-container';
-import { AzurermBackend } from 'cdktf/lib/backends/azurerm-backend';
 import { Construct } from 'constructs';
+import { AzureConstruct } from '../classes';
 import { EnvProps } from '../interfaces';
 
 export interface AzureRemoteBackendProps {
+  isLocalBackend?: boolean;
   env: EnvProps;
-  resourceGroupName: string;
   storageAccount: Omit<StorageAccountConfig, 'name' | 'resourceGroupName'>;
   storageContainer?: Omit<StorageContainerConfig, 'name' | 'storageAccountName'>;
 }
 
-export class AzureRemoteBackend extends Construct {
+export class AzureRemoteBackend extends AzureConstruct {
   constructor(scope: Construct, id: string, props: AzureRemoteBackendProps) {
-    super(scope, id);
+    super(scope, id, props);
 
-    const { env: { name }, resourceGroupName, storageAccount, storageContainer } = props;
-
-    new AzurermProvider(this, 'azure_provider', {
-      skipProviderRegistration: true,
-      features: {},
-    });
+    const { env: { name, resourceGroupName }, storageAccount, storageContainer } = props;
 
     new StorageAccount(this, 'storage_account', { ...storageAccount, name, resourceGroupName });
 
     new StorageContainer(this, 'state_container', {
       ...storageContainer,
       name,
-      storageAccountName: name,
-    });
-
-    new AzurermBackend(this, {
-      resourceGroupName,
-      containerName: name,
-      key: 'trndev.terraform.tfstate',
       storageAccountName: name,
     });
   }
