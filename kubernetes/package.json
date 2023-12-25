@@ -1,5 +1,5 @@
 {
-  "name": "trn-cdktf-components",
+  "name": "trn-cdk8s-components",
   "version": "0.1.0",
   "main": "main.js",
   "types": "main.ts",
