@@ -7,7 +7,6 @@ import { EnvProps } from './interfaces';
 export enum AzureProviders {
   AZURE = 'azure_provider',
   AZUREAD = 'azure_ad_provider'
-
 }
 
 export interface AzureConstructProps {
