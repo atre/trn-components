@@ -4,4 +4,5 @@ export interface EksConstructConfig extends EksClusterConfig {
   vpcId: string;
   subnetIds: string[];
   cidrBlocks: string[];
+  securityGroupIds: string[];
 }
