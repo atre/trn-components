@@ -10,6 +10,7 @@ export interface VpcOptions {
   tags?: Record<string, string>;
   publicSubnetTags?: Record<string, string>;
   privateSubnetTags?: Record<string, string>;
+  region?: string;
 }
 
 export interface SubnetOptions {

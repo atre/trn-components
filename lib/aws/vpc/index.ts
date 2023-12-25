@@ -23,6 +23,8 @@ export class VpcConstruct extends Construct {
     const vpc = new Vpc(this, 'vpc', {
       tags: { Name: name },
       cidrBlock: cidr,
+      enableDnsSupport: true,
+      enableDnsHostnames: true,
     });
 
     const publicSubnets = this.createSubnets(SubnetType.Public, opts?.publicSubnets ?? [], {
@@ -57,9 +59,10 @@ export class VpcConstruct extends Construct {
     });
 
     // TODO Add possibility to create shared nat gateway according to singleNatGateway: true option
-    const natGateways = privateSubnets.map((subnet, index) => {
+    const natGateways = publicSubnets.map((subnet, index) => {
       const eip = new Eip(this, `eip-${index}`, {
-        vpc: true,
+        // vpc: true,
+        domain: 'vpc',
       });
 
       return new NatGateway(this, `nat-gateway-${index}`, {
