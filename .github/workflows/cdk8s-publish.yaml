@@ -1,11 +1,11 @@
-name: Publish cdktf to npm
+name: Publish cdk8s to npm
 
 on:
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: ./terraform
+    working-directory: ./kubernetes
 
 jobs:
   lint:
