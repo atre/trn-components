@@ -7,14 +7,13 @@ import { EnvProps } from './interfaces';
 export enum AzureProviders {
   AZURE = 'azure_provider',
   AZUREAD = 'azure_ad_provider'
-
 }
 
 export interface AzureConstructProps {
   isLocalBackend?: boolean;
   provider?: AzureProviders;
   env: EnvProps;
-  tags?: Record<string, string>;
+  tags?: Record<string, string | number>;
 }
 
 export class AzureConstruct extends Construct {
