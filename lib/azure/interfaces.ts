@@ -3,4 +3,5 @@ export interface EnvProps {
   env: string;
   location: string;
   resourceGroupName: string;
+  url?: string;
 }
