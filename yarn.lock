@@ -307,6 +307,11 @@
   resolved "https://registry.yarnpkg.com/@cdktf/provider-aws/-/provider-aws-18.2.0.tgz#ef1c6088111754fff0f9712d85811a7e4d891821"
   integrity sha512-Dm+ORqd9ttGH8PqdDe4q72QHoHO0BfgBEMDasagcP4b0lhYV3oiYxJtHsqdOJEKiv6EvHZT3/iftXwU2uOjnlA==
 
+"@cdktf/provider-azurerm@^11.0.7":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@cdktf/provider-azurerm/-/provider-azurerm-11.2.0.tgz#d83d5235e803e16931db55d820f29b38ff2b6a28"
+  integrity sha512-1YpDrScd4YckEVKBPnXUI9yGeRmv7SiQdAj6Mq9eBXWgP1bemRk4mkQlqGm2pe9h5BECLEMZyAg5Cv/JGJX0Uw==
+
 "@cdktf/provider-github@12.0.2":
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/@cdktf/provider-github/-/provider-github-12.0.2.tgz#c3e50145fc6f83d4e9667b522f677acf7458c773"
