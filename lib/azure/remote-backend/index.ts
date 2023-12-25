@@ -12,14 +12,14 @@ export class AzureRemoteBackend extends AzureConstruct {
   constructor(scope: Construct, id: string, props: AzureRemoteBackendProps) {
     super(scope, id, props);
 
-    const { env: { name, location, resourceGroupName }, storageAccount, storageContainer } = props;
+    const { env: { name, env, location, resourceGroupName }, storageAccount, storageContainer } = props;
 
-    new StorageAccount(this, 'storage_account', { ...storageAccount, name, location, resourceGroupName });
+    new StorageAccount(this, 'storage_account', { ...storageAccount, tags: this.tags, name: `${name}${env}`, location, resourceGroupName });
 
     new StorageContainer(this, 'state_container', {
       ...storageContainer,
-      name,
-      storageAccountName: name,
+      name: this.name,
+      storageAccountName: `${name}${env}`,
     });
   }
 }

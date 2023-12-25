@@ -13,13 +13,20 @@ export interface AzureConstructProps {
   isLocalBackend?: boolean;
   provider?: AzureProviders;
   env: EnvProps;
+  tags?: Record<string, string | number>;
 }
 
 export class AzureConstruct extends Construct {
+  public readonly name: string;
+  public readonly tags: Record<string, string>;
+
   constructor(scope: Construct, id: string, props: AzureConstructProps) {
     super(scope, id);
 
-    const { isLocalBackend = false, provider = AzureProviders.AZURE, env: { name, resourceGroupName } } = props;
+    const { isLocalBackend = false, provider = AzureProviders.AZURE, env: { name, env, location, resourceGroupName }, tags = {} } = props;
+
+    this.tags = { name, env, id, location, ...tags };
+    this.name = `${name}-${env}`;
 
     switch (provider) {
       case AzureProviders.AZURE:
@@ -38,9 +45,9 @@ export class AzureConstruct extends Construct {
     if (!isLocalBackend) {
       new AzurermBackend(this, {
         resourceGroupName,
-        containerName: name,
-        key: `${name}.${id}.terraform.tfstate`,
-        storageAccountName: name,
+        containerName: this.name,
+        key: `${name}.${env}.${id}.terraform.tfstate`,
+        storageAccountName: `${name}${env}`,
       });
     }
   }
