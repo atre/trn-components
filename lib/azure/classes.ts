@@ -11,14 +11,14 @@ export interface AzureConstructProps {
 
 export class AzureConstruct extends Construct {
   public readonly name: string;
-  private _tags: Record<string, string>;
+  public readonly tags: Record<string, string>;
 
   constructor(scope: Construct, id: string, props: AzureConstructProps) {
     super(scope, id);
 
     const { isLocalBackend = false, env: { name, env, location, resourceGroupName }, tags = {} } = props;
 
-    this._tags = { name, env, id, location, ...tags };
+    this.tags = { name, env, id, location, ...tags };
     this.name = `${name}-${env}`;
 
     new AzurermProvider(this, 'azure_provider', {
@@ -34,9 +34,5 @@ export class AzureConstruct extends Construct {
         storageAccountName: name,
       });
     }
-  }
-
-  public get tags() {
-    return this._tags;
   }
 }
