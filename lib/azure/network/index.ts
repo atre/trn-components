@@ -17,6 +17,7 @@ export class Network extends AzureConstruct {
       location,
       name,
       resourceGroupName,
+      tags: this.tags,
     });
   }
 }
