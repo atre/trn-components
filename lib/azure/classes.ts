@@ -6,13 +6,20 @@ import { EnvProps } from './interfaces';
 export interface AzureConstructProps {
   isLocalBackend?: boolean;
   env: EnvProps;
+  tags?: Record<string, string>;
 }
 
 export class AzureConstruct extends Construct {
+  public readonly name: string;
+  private _tags: Record<string, string>;
+
   constructor(scope: Construct, id: string, props: AzureConstructProps) {
     super(scope, id);
 
-    const { isLocalBackend = false, env: { name, resourceGroupName } } = props;
+    const { isLocalBackend = false, env: { name, env, location, resourceGroupName }, tags = {} } = props;
+
+    this._tags = { name, env, id, location, ...tags };
+    this.name = `${name}-${env}`;
 
     new AzurermProvider(this, 'azure_provider', {
       skipProviderRegistration: true,
@@ -23,9 +30,13 @@ export class AzureConstruct extends Construct {
       new AzurermBackend(this, {
         resourceGroupName,
         containerName: name,
-        key: `${name}.${id}.terraform.tfstate`,
+        key: `${name}.${env}.${id}.terraform.tfstate`,
         storageAccountName: name,
       });
     }
+  }
+
+  public get tags() {
+    return this._tags;
   }
 }

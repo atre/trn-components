@@ -19,7 +19,7 @@
     "upgrade:next": "npm i cdktf@next cdktf-cli@next"
   },
   "engines": {
-    "node": ">=20.10"
+    "node": ">=20.7"
   },
   "dependencies": {
     "@cdktf/provider-aws": "^18.0.6",
