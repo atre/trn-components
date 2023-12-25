@@ -14,7 +14,7 @@ export interface AzureConstructProps {
   isLocalBackend?: boolean;
   provider?: AzureProviders;
   env: EnvProps;
-  tags?: Record<string, string>;
+  tags?: Record<string, string | number>;
 }
 
 export class AzureConstruct extends Construct {
