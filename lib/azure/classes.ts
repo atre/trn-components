@@ -29,9 +29,9 @@ export class AzureConstruct extends Construct {
     if (!isLocalBackend) {
       new AzurermBackend(this, {
         resourceGroupName,
-        containerName: name,
+        containerName: this.name,
         key: `${name}.${env}.${id}.terraform.tfstate`,
-        storageAccountName: name,
+        storageAccountName: `${name}${env}`,
       });
     }
   }
