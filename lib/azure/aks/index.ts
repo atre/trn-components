@@ -12,6 +12,6 @@ export class Aks extends AzureConstruct {
 
     const { env, tags, kubernetesCluster } = props;
 
-    new KubernetesCluster(this, 'kubernetes_cluster', { ...kubernetesCluster, ...env, dnsPrefix: env.name, tags });
+    new KubernetesCluster(this, 'kubernetes_cluster', { ...kubernetesCluster, ...env, name: this.name, dnsPrefix: this.name, tags });
   }
 }
