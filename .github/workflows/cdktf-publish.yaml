@@ -3,6 +3,10 @@ name: Publish to npm
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: ./terraform
+
 jobs:
   lint:
     runs-on: ubuntu-latest
