@@ -22,7 +22,7 @@ export class ClusterSecurityGroupConstruct extends Construct {
       },
     });
 
-    new SecurityGroupRule(this, 'eks-cluster-sg-rule', {
+    new SecurityGroupRule(this, 'eks-cluster-sg-rule-ingress', {
       securityGroupId: clusterSG.id,
       description: 'Node groups to cluster API',
       fromPort: 443,
@@ -32,10 +32,40 @@ export class ClusterSecurityGroupConstruct extends Construct {
       cidrBlocks,
     });
 
+    new SecurityGroupRule(this, 'eks-cluster-sg-rule-ingress2', {
+      securityGroupId: clusterSG.id,
+      description: 'Node groups to cluster API',
+      fromPort: 80,
+      toPort: 80,
+      protocol: 'tcp',
+      type: 'ingress',
+      cidrBlocks,
+    });
+
+    new SecurityGroupRule(this, 'eks-cluster-sg-ssh-rule-ingress', {
+      securityGroupId: clusterSG.id,
+      description: 'ssh connect to cluster API',
+      fromPort: 22,
+      toPort: 22,
+      protocol: 'tcp',
+      type: 'ingress',
+      cidrBlocks: ['0.0.0.0/0'],
+    });
+
+    new SecurityGroupRule(this, 'eks-cluster-sg-ssh-rule-egress', {
+      securityGroupId: clusterSG.id,
+      description: 'ssh connect to cluster API',
+      fromPort: 0,
+      toPort: 0,
+      protocol: '-1',
+      type: 'egress',
+      cidrBlocks: ['0.0.0.0/0'],
+    });
+
     this.id = clusterSG.id;
   }
 
   getSecurityGroupName() {
-    return this.opts.name ?? 'eks-cluster-sg';
+    return `${this.opts.name}-sg` ?? 'eks-cluster-sg';
   }
 }

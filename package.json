@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "license": "MPL-2.0",
   "private": false,
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
+    "clean": "rm -rf build/*",
     "prepare": "husky install",
     "get": "cdktf get",
-    "build": "tsc",
+    "build": "npm run clean && tsc",
     "synth": "cdktf synth",
     "compile": "tsc --pretty",
     "lint": "eslint . --ext .ts",
@@ -22,11 +25,13 @@
     "node": ">=20.7"
   },
   "dependencies": {
-    "@cdktf/provider-aws": "^18.0.6",
+    "@cdktf/provider-aws": "^18.2.0",
     "@cdktf/provider-azuread": "^11.1.0",
     "@cdktf/provider-azurerm": "^11.0.7",
     "@cdktf/provider-github": "12.0.2",
-    "cdktf": "^0.19.1",
+    "@cdktf/provider-helm": "^9.0.2",
+    "@cdktf/provider-kubernetes": "^10.0.1",
+    "cdktf": "^0.19.2",
     "constructs": "^10.3.0",
     "husky": "^8.0.3"
   },

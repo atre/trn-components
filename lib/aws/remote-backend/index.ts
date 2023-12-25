@@ -1,5 +1,6 @@
 import { DynamodbTable, DynamodbTableConfig } from '@cdktf/provider-aws/lib/dynamodb-table';
 import { S3Bucket, S3BucketConfig } from '@cdktf/provider-aws/lib/s3-bucket';
+import { S3BucketVersioningA } from '@cdktf/provider-aws/lib/s3-bucket-versioning';
 import { Construct } from 'constructs';
 
 export class RemoteBackendConstruct extends Construct {
@@ -10,11 +11,18 @@ export class RemoteBackendConstruct extends Construct {
   ) {
     super(scope, id);
 
-    new S3Bucket(this, 'backend', {
+    const bucket = new S3Bucket(this, 'backend', {
       ...opts,
       bucket: this.getBucketName(),
       versioning: {
         enabled: true,
+      },
+    });
+
+    new S3BucketVersioningA(this, 'backend-versioning', {
+      bucket: bucket.bucket,
+      versioningConfiguration: {
+        status: 'Enabled',
       },
     });
 
