@@ -5,6 +5,7 @@
     "experimentalDecorators": true,
     "inlineSourceMap": true,
     "inlineSources": true,
+    "outDir": "build",
     "lib": [
       "es2018"
     ],
@@ -26,7 +27,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "**/*.ts"
+    "./lib/**/*.ts"
   ],
   "exclude": [
     "node_modules",

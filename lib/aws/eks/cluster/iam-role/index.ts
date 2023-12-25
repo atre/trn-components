@@ -2,7 +2,7 @@ import { DataAwsIamPolicyDocument } from '@cdktf/provider-aws/lib/data-aws-iam-p
 import { IamRole, IamRoleConfig } from '@cdktf/provider-aws/lib/iam-role';
 import { IamRolePolicyAttachment } from '@cdktf/provider-aws/lib/iam-role-policy-attachment';
 import { Construct } from 'constructs';
-import { eksRolePolicyArns, eksServiceIdentifier } from './constant';
+import { eksServiceIdentifier, iamRolePolicyPrefix } from '../../constant';
 
 export class IamRoleConstruct extends Construct {
   public readonly name: string;
@@ -39,9 +39,11 @@ export class IamRoleConstruct extends Construct {
       },
     });
 
-    eksRolePolicyArns.forEach((policyArn, index) => {
+    ['AmazonEKSClusterPolicy', 'AmazonEKSVPCResourceController'].forEach((policyName, index) => {
+      const policy = `${iamRolePolicyPrefix}${policyName}`;
+
       new IamRolePolicyAttachment(this, `eks-role-policy-${index}`, {
-        policyArn,
+        policyArn: policy,
         role: controlPlaneRole.name,
       });
     });
@@ -53,6 +55,6 @@ export class IamRoleConstruct extends Construct {
 
 
   getControlPLaneRoleName() {
-    return this.name ?? 'control-plane-role';
+    return `${this.opts.name}-role` ?? 'control-plane-role';
   }
 }
